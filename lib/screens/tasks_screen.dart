@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/components/task_list.dart';
 import 'package:todoey/const.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
+
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  bool? isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +52,16 @@ class TasksScreen extends StatelessWidget {
                 ])),
         Expanded(
             child: Container(
-          decoration: const BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
-              )),
-        ))
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                decoration: const BoxDecoration(
+                    color: kWhite,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(30),
+                    )),
+                child: TaskList(
+                  isChecked: isChecked!,
+                )))
       ]),
     );
   }
