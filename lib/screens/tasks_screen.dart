@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/components/task_list.dart';
 import 'package:todoey/const.dart';
+import 'package:todoey/screens/add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -17,7 +18,12 @@ class _TasksScreenState extends State<TasksScreen> {
     return Scaffold(
       backgroundColor: kLBlue,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) => const AddTaskScreen());
+        },
         backgroundColor: kLBlue,
         child: const Icon(
           Icons.add,
@@ -53,12 +59,7 @@ class _TasksScreenState extends State<TasksScreen> {
         Expanded(
             child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                decoration: const BoxDecoration(
-                    color: kWhite,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      topLeft: Radius.circular(30),
-                    )),
+                decoration: kBoxDecoration,
                 child: TaskList(
                   isChecked: isChecked!,
                 )))
