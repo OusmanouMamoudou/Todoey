@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:todoey/const.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  const AddTaskScreen({super.key, required this.addNewTask});
+  final Function addNewTask;
 
   @override
   Widget build(BuildContext context) {
+    String? newTask;
     return Center(
       child: Container(
           padding: const EdgeInsets.all(15),
@@ -21,7 +23,11 @@ class AddTaskScreen extends StatelessWidget {
                   fontSize: 30,
                 ),
               ),
-              TextField(autofocus: true, onChanged: (value) {}),
+              TextField(
+                  autofocus: true,
+                  onChanged: (value) {
+                    newTask = value;
+                  }),
               TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: kLBlue,
@@ -33,7 +39,9 @@ class AddTaskScreen extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  onPressed: () {})
+                  onPressed: () {
+                    addNewTask(newTask);
+                  })
             ],
           )),
     );

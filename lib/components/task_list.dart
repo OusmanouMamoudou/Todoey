@@ -3,30 +3,26 @@ import 'package:todoey/components/task_item.dart';
 import 'package:todoey/models/task.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({super.key, required});
+  const TaskList({super.key, required this.tasks});
+  final List<Task> tasks;
 
   @override
   State<TaskList> createState() => _TaskListState();
 }
 
 class _TaskListState extends State<TaskList> {
-  List<Task> tasks = [
-    Task(title: 'Acheter du lait'),
-    Task(title: 'Acheter des oeufs'),
-    Task(title: 'Acheter du Pain'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    print(widget.tasks[0].isDone);
     return ListView.builder(
-        itemCount: tasks.length,
+        itemCount: widget.tasks.length,
         itemBuilder: (context, i) {
           return TaskItem(
-              title: tasks[i].title!,
-              isChecked: tasks[i].isDone,
+              title: widget.tasks[i].title!,
+              isChecked: widget.tasks[i].isDone,
               function: (value) {
                 setState(() {
-                  tasks[i].toggleIsDone();
+                  widget.tasks[i].toggleIsDone();
                 });
               });
         });

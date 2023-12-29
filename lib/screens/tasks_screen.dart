@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/components/task_list.dart';
 import 'package:todoey/const.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -11,6 +12,11 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(title: 'Acheter du lait'),
+    Task(title: 'Acheter des oeufs'),
+    Task(title: 'Acheter du Pain'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +32,14 @@ class _TasksScreenState extends State<TasksScreen> {
                       padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
-                      child: const AddTaskScreen())));
+                      child: AddTaskScreen(
+                        addNewTask: (newTask) {
+                          setState(() {
+                            tasks.add(Task(title: newTask));
+                          });
+                          Navigator.pop(context);
+                        },
+                      ))));
         },
         backgroundColor: kLBlue,
         child: const Icon(
@@ -38,33 +51,34 @@ class _TasksScreenState extends State<TasksScreen> {
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
             padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
-            child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 30,
-                    child: Icon(Icons.list, size: 40, color: kLBlue),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Todoey',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w700,
-                        color: kWhite,
-                      )),
-                  Text('12 Tâches',
-                      style: TextStyle(
-                        color: kWhite,
-                      ))
-                ])),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 30,
+                child: Icon(Icons.list, size: 40, color: kLBlue),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text('Todoey',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.w700,
+                    color: kWhite,
+                  )),
+              Text('${tasks.length} Tâches',
+                  style: const TextStyle(
+                    color: kWhite,
+                  ))
+            ])),
         Expanded(
             child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 decoration: kBoxDecoration,
-                child: const TaskList()))
+                child: TaskList(
+                  tasks: tasks,
+                )))
       ]),
     );
   }
