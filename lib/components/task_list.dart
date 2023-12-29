@@ -6,18 +6,15 @@ class TaskList extends StatelessWidget {
   final bool isChecked;
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
+    return ListView(children: const [
       TaskItem(
         title: 'Acheter du lait',
-        isChecked: isChecked,
       ),
       TaskItem(
         title: 'Acheter des oeufs',
-        isChecked: isChecked,
       ),
       TaskItem(
         title: 'Acheter du Pains',
-        isChecked: isChecked,
       ),
     ]);
   }
