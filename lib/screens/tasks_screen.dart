@@ -11,8 +11,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  bool? isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +64,7 @@ class _TasksScreenState extends State<TasksScreen> {
             child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 decoration: kBoxDecoration,
-                child: TaskList(
-                  isChecked: isChecked!,
-                )))
+                child: const TaskList()))
       ]),
     );
   }
