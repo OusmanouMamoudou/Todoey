@@ -13,7 +13,6 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
-    print(widget.tasks[0].isDone);
     return ListView.builder(
         itemCount: widget.tasks.length,
         itemBuilder: (context, i) {
