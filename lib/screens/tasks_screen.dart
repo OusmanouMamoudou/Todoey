@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/components/task_list.dart';
 import 'package:todoey/const.dart';
-import 'package:todoey/models/task.dart';
+import 'package:todoey/models/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(title: 'Acheter du lait'),
-    Task(title: 'Acheter des oeufs'),
-    Task(title: 'Acheter du Pain'),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +25,9 @@ class _TasksScreenState extends State<TasksScreen> {
                       ),
                       child: AddTaskScreen(
                         addNewTask: (newTask) {
-                          setState(() {
-                            tasks.add(Task(title: newTask));
-                          });
+                          // setState(() {
+                          //   tasks.add(Task(title: newTask));
+                          // });
                           Navigator.pop(context);
                         },
                       ))));
@@ -67,18 +58,18 @@ class _TasksScreenState extends State<TasksScreen> {
                     fontWeight: FontWeight.w700,
                     color: kWhite,
                   )),
-              Text('${tasks.length} Tâches',
-                  style: const TextStyle(
-                    color: kWhite,
-                  ))
+              Consumer<TaskData>(builder: (context, taskData, child) {
+                return Text('${taskData.tasksLength} Tâches',
+                    style: const TextStyle(
+                      color: kWhite,
+                    ));
+              })
             ])),
         Expanded(
             child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 decoration: kBoxDecoration,
-                child: TaskList(
-                  tasks: tasks,
-                )))
+                child: const TaskList()))
       ]),
     );
   }
