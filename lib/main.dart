@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<TaskData>(
       create: (context) => TaskData(),
-      builder: (context, child) => const MaterialApp(
-        home: TasksScreen(),
+      builder: (context, child) => MaterialApp(
+        theme: ThemeData.dark(useMaterial3: true),
+        home: const TasksScreen(),
       ),
     );
   }

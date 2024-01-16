@@ -22,18 +22,29 @@ class AddTaskScreen extends StatelessWidget {
                 'Ajouter Une Tâche',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: kLBlue,
+                  color: kBlack,
                   fontSize: 30,
                 ),
               ),
               TextField(
                   autofocus: true,
+                  decoration: const InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      //<-- SEE HERE
+                      borderSide: BorderSide(width: 3, color: kBlack),
+                    ),
+                  ),
+                  style: const TextStyle(
+                      color: kBlack, fontWeight: FontWeight.w600),
                   onChanged: (value) {
                     taskName = value;
                   }),
+              const SizedBox(
+                height: 8,
+              ),
               TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: kLBlue,
+                    backgroundColor: kBlack,
                   ),
                   child: const Text(
                     'Ajouter',

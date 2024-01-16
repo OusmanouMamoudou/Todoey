@@ -11,30 +11,6 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kLBlue,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            context: context,
-            builder: (context) => SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: const AddTaskScreen(),
-              ),
-            ),
-          );
-        },
-        backgroundColor: kLBlue,
-        child: const Icon(
-          Icons.add,
-          color: kWhite,
-          size: 40,
-        ),
-      ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
             padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
@@ -43,7 +19,7 @@ class TasksScreen extends StatelessWidget {
               const CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: 30,
-                child: Icon(Icons.list, size: 40, color: kLBlue),
+                child: Icon(Icons.list, size: 40, color: kBlack),
               ),
               const SizedBox(
                 height: 10,
@@ -55,10 +31,13 @@ class TasksScreen extends StatelessWidget {
                     color: kWhite,
                   )),
               Consumer<TaskData>(builder: (context, taskData, child) {
-                return Text('${taskData.tasksLength} Tâches',
-                    style: const TextStyle(
-                      color: kWhite,
-                    ));
+                if (taskData.tasks.isNotEmpty) {
+                  return Text('${taskData.tasksLength} Tâches',
+                      style: const TextStyle(
+                        color: kWhite,
+                      ));
+                }
+                return const Text('');
               })
             ])),
         Expanded(

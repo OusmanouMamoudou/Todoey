@@ -5,9 +5,9 @@ import 'package:todoey/models/task.dart';
 
 class TaskData extends ChangeNotifier {
   final List<Task> _tasks = [
-    Task(title: 'Acheter du lait'),
-    Task(title: 'Acheter des oeufs'),
-    Task(title: 'Acheter du Pain'),
+    Task(name: 'Acheter du lait'),
+    Task(name: 'Acheter des oeufs'),
+    Task(name: 'Acheter du Pain'),
   ];
   int get tasksLength {
     return _tasks.length;
@@ -18,7 +18,7 @@ class TaskData extends ChangeNotifier {
   }
 
   void addTask(taskName) {
-    final newTask = Task(title: taskName);
+    final newTask = Task(name: taskName);
     _tasks.add(newTask);
     notifyListeners();
   }
@@ -29,7 +29,6 @@ class TaskData extends ChangeNotifier {
   }
 
   void deleteTask(Task task) {
-    
     _tasks.remove(task);
     notifyListeners();
   }
